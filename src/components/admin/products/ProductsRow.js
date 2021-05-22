@@ -40,8 +40,7 @@ class ProductsRow extends Component{
                     <td>{this.state.product.ventor}</td>
                     <td><img class="image" src={window.location.origin + '/images/' + this.state.product.img} alt=""/></td>
                     <td>{this.state.product.description}</td>
-                    <td><Link to={'/products/edit/'+this.state.product.id}><Button color="info">Edit</Button></Link></td>
-                    <td><Button color='danger' onClick={this.onDelete}>Delete</Button></td>
+
         	</tr>
         )
     }

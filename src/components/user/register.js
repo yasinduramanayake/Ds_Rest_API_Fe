@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 class Register extends Component{
 
@@ -17,9 +21,11 @@ class Register extends Component{
             password:''
         };
 
+
         this.onFormSubmit= this.onFormSubmit.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
+
     }
 
     onDismiss() {
@@ -32,7 +38,13 @@ class Register extends Component{
         })
     }
 
-    onFormSubmit(e){
+
+    onFormSubmit(e) {
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         e.preventDefault();
 
         const full_name = this.state.full_name;
@@ -84,81 +96,68 @@ class Register extends Component{
             )
 
     }
-    render(){
-        return(
-            <div className="container" style={{marginTop:'20px'}}>
-                <main role="main" style={{marginTop:'40px'}}>
-                    <section className="jumbotron text-center" >
-                        <div className="container">
-                                <div className="col-md-12 text-center">
-                                <h2 className="pb-4">Register here!</h2>
-                                <center>
-                                    <form onSubmit={this.onFormSubmit}>
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label>Full name</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="full_name"
-                                                placeholder="full_name"
-                                                onChange={this.onValueChange}
-                                                value={this.state.full_name}/>
-                                        </div>
+    render() {
 
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Gender</label>
-                                            <textarea
-                                                    className="form-control"
-                                                    name="gender"
-                                                    placeholder="gender"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.gender}/>
-                                        </div>
+        return (
 
 
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Date Of Birth</label>
-                                            <input
-                                                    type="date"
-                                                    className="form-control"
-                                                    name="date_of_birth"
-                                                    placeholder="Date_of_birth"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.date_of_birth}/>
-                                        </div>
-                                           <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Password</label>
-                                            <input
-                                                    type="password"
-                                                    className="form-control"
-                                                    name="password"
-                                                    placeholder="password"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.password}/>
-                                        </div>
-                                           <div className="col-lg-6 col-md-6 form-group">
-                                            <label >E-mail</label>
-                                            <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    name="email"
-                                                    rows="2"
-                                                    placeholder="email"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.email}/>
-                                        </div>
+            <Card>
 
-                                    <div className="form-group text-center">
-                                        <button type="submit"className="admin-blue-button">Register</button>
-                                    </div>
-                                    </form>
-                                    </center>
-                            </div>
-                            </div>
+                <Card.Header as="h5">Register Here!</Card.Header>
+                <Card.Body>
+                    <Form onSubmit={this.onFormSubmit}>
 
-                    </section>
-                </main>
-            </div>
+
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control required type="email" placeholder="Enter email" name="email"
+                                onChange={this.onValueChange}
+                                value={this.state.email} />
+                            <Form.Text className="text-muted">
+                                We'll never share your email with anyone else.
+                                    </Form.Text>
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control aria-describedby="passwordHelpBlock" required type="password" placeholder="Password" name="password"
+                                onChange={this.onValueChange}
+                                value={this.state.password} />
+                            <Form.Text id="passwordHelpBlock" muted>
+                                Your password must be 8-20 characters long, contain letters and numbers, and
+                                must not contain spaces, special characters, or emoji.
+                             </Form.Text>
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
+                        </Form.Group>
+                        <Form.Group controlId="formBasicFullnamed">
+                            <Form.Label>Full Name</Form.Label>
+                            <Form.Control type="text" required placeholder="Full Name" name="full_name" onChange={this.onValueChange} value={this.state.full_name} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Gender</Form.Label>
+                            <Form.Control as="select" name="gender" required onChange={this.onValueChange} value={this.state.gender}>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </Form.Control>
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicDOB">
+                            <Form.Label>Date Of Birth</Form.Label>
+                            <Form.Control required type="date" placeholder="Enter Date Of Birth" name="date_of_birth"
+                                onChange={this.onValueChange}
+                                value={this.state.date_of_birth} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit">
+                            Submit
+                                </Button>
+                    </Form>
+                </Card.Body>
+            </Card>
         );
     }
 }

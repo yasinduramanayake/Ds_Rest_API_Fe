@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route} from "react-router-dom";
 import './assets/css/admin/admin2.css';
 import './assets/css/user/style.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AddProducts from './components/admin/products/AddProducts';
 import ViewProducts from './components/admin/products/ViewProducts';
