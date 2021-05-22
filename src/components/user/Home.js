@@ -2,12 +2,14 @@ import React, {Component} from 'react'
 import axios from "axios";
 import Swal from "sweetalert2";
 import NevBar from './nevbar';
+
 import { Button } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
-import {  NavDropdown } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
+
 
 
 
@@ -63,7 +65,13 @@ class Home extends Component {
     }
     render() {
         return (
-<NevBar></NevBar>
+            <div>
+
+                <NevBar></NevBar>
+
+                </div>
+
+
         );
     }
 }

@@ -15,7 +15,7 @@ class Register extends Component{
         this.state = {
             visible: false,
             full_name:'',
-            gender: '',
+            mobile: '',
             date_of_birth:'',
             email: '',
             password:''
@@ -48,7 +48,7 @@ class Register extends Component{
         e.preventDefault();
 
         const full_name = this.state.full_name;
-        const gender = this.state.gender;
+        const mobile = this.state.mobile;
         const date_of_birth = this.state.date_of_birth;
         const email = this.state.email;
         const password = this.state.password;
@@ -56,7 +56,7 @@ class Register extends Component{
 
         const users={
             full_name,
-            gender,
+            mobile,
             date_of_birth,
             email,
             password
@@ -68,7 +68,7 @@ class Register extends Component{
                     this.setState({
                         visible:true,
                         full_name:'',
-                        gender: '',
+                        mobile: '',
                         date_of_birth: '',
                         email: '',
                         password:''
@@ -137,11 +137,9 @@ class Register extends Component{
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label>Gender</Form.Label>
-                            <Form.Control as="select" name="gender" required onChange={this.onValueChange} value={this.state.gender}>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </Form.Control>
+                            <Form.Label>Mobile</Form.Label>
+
+                       <Form.Control type="number" required placeholder="Mobile" name="mobile" onChange={this.onValueChange} value={this.state.mobile} />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group controlId="formBasicDOB">

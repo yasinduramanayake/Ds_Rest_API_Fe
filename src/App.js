@@ -17,6 +17,7 @@ import EditProfile from './components/user/edit';
 
 
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/editprofile" component={EditProfile } />
+        <Route exact path="/editprofile" component={EditProfile} />
+
 
         </div>
     </BrowserRouter>

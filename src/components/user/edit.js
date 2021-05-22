@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import NevBar from './nevbar';
 
 class Update extends Component{
 
@@ -11,7 +15,7 @@ class Update extends Component{
         this.state = {
             visible: false,
             full_name:'',
-            gender: '',
+            mobile: '',
             date_of_birth:'',
             email: '',
             password: '',
@@ -28,7 +32,7 @@ class Update extends Component{
                 res=>{
                     this.setState({
                         full_name: res.data.full_name,
-                        gender: res.data.gender,
+                        mobile: res.data.mobile,
                         date_of_birth: res.data.date_of_birth,
                         password: res.data.password,
                         email:res.data.email
@@ -51,7 +55,7 @@ class Update extends Component{
         e.preventDefault();
 
         const full_name = this.state.full_name;
-        const gender = this.state.gender;
+        const mobile = this.state.mobile;
         const date_of_birth = this.state.date_of_birth;
         const email = this.state.email;
         const password = this.state.password;
@@ -59,7 +63,7 @@ class Update extends Component{
 
         const users={
             full_name,
-            gender,
+            mobile,
             date_of_birth,
             email,
             password
@@ -71,7 +75,7 @@ class Update extends Component{
                     this.setState({
                         visible:true,
                         full_name:'',
-                        gender: '',
+                        mobile: '',
                         date_of_birth: '',
                         email: '',
                         password:''
@@ -101,79 +105,63 @@ class Update extends Component{
     }
     render(){
         return(
-            <div className="container" style={{marginTop:'20px'}}>
-                <main role="main" style={{marginTop:'40px'}}>
-                    <section className="jumbotron text-center" >
-                        <div className="container">
-                                <div className="col-md-12 text-center">
-                                <h2 className="pb-4">Update details!</h2>
-                                <center>
-                                    <form onSubmit={this.onFormSubmit}>
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label>Full name</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="full_name"
-                                                // placeholder="full name"
-                                                onChange={this.onValueChange}
-                                                value={this.state.full_name}/>
-                                        </div>
+            <center>
+                 < NevBar></NevBar>
+<br></br>
+            <Card style={{width:'600px'}}>
 
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Gender</label>
-                                            <textarea
-                                                    className="form-control"
-                                                    name="gender"
-                                                    placeholder="gender"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.gender}/>
-                                        </div>
+                <Card.Header as="h5">Edit Your Profile</Card.Header>
+                <Card.Body>
+                    <Form onSubmit={this.onFormSubmit}>
 
 
-                                        <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Date Of Birth</label>
-                                            <input
-                                                    type="date"
-                                                    className="form-control"
-                                                    name="date_of_birth"
-                                                    placeholder="Date_of_birth"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.date_of_birth}/>
-                                        </div>
-                                           <div className="col-lg-6 col-md-6 form-group">
-                                            <label >Password</label>
-                                            <input
-                                                    type="password"
-                                                    className="form-control"
-                                                    name="password"
-                                                    placeholder="password"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.password}/>
-                                        </div>
-                                           <div className="col-lg-6 col-md-6 form-group">
-                                            <label >E-mail</label>
-                                            <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    name="email"
-                                                    rows="2"
-                                                    placeholder="email"
-                                                    onChange={this.onValueChange}
-                                                    value={this.state.email}/>
-                                        </div>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control required type="email" placeholder=" email" name="email"
+                                onChange={this.onValueChange}
+                                value={this.state.email} />
+                            <Form.Text className="text-muted">
+                                We'll never share your email with anyone else.
+                                    </Form.Text>
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
 
-                                    <div className="form-group text-center">
-                                        <button type="submit"className="admin-blue-button">update</button>
-                                    </div>
-                                    </form>
-                                    </center>
-                            </div>
-                            </div>
+                        <Form.Group controlId="formBasicPassword">
 
-                    </section>
-                </main>
-            </div>
+
+                            <Form.Control aria-describedby="passwordHelpBlock" required type="hidden" placeholder="Password" name="password"
+                                onChange={this.onValueChange}
+                                    value={this.state.password} />
+
+                        </Form.Group>
+                        <Form.Group controlId="formBasicFullnamed">
+                            <Form.Label>Full Name</Form.Label>
+                            <Form.Control type="text" required placeholder="Full Name" name="full_name" onChange={this.onValueChange} value={this.state.full_name} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Mobile</Form.Label>
+
+                       <Form.Control type="number" required placeholder="Mobile" name="mobile" onChange={this.onValueChange} value={this.state.mobile} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicDOB">
+                            <Form.Label>Date Of Birth</Form.Label>
+                            <Form.Control required type="date" placeholder="Enter Date Of Birth" name="date_of_birth"
+                                onChange={this.onValueChange}
+                                value={this.state.date_of_birth} />
+                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Button variant="primary" type="submit">
+                            Update
+                                </Button>
+                    </Form>
+                </Card.Body>
+                </Card>
+                </center>
         );
     }
 }

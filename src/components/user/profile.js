@@ -4,8 +4,10 @@ import Swal from 'sweetalert2'
 import {Link} from 'react-router-dom';
 import { CardHeader, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Button, Card, CardTitle, Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
+import NevBar from './nevbar';
 
-class Login extends Component{
+
+class profile extends Component{
 
     constructor(props) {
         super(props);
@@ -37,9 +39,10 @@ class Login extends Component{
 
     render(){
         return (
-            <center>
-                <br></br> <br></br> <br></br>
-                <Card style={{ width: '80rem' }}>
+            <center >
+                < NevBar></NevBar>
+                <br></br>
+                <Card style={{width:'480px'}}>
                     <CardHeader></CardHeader>
                     <CardTitle style={{ backgroundColor:'blue' }} >
                         <h2>{this.state.userdetails.full_name}
@@ -52,19 +55,19 @@ class Login extends Component{
                                         <p>{this.state.userdetails.full_name}</p></ListGroupItem>
                    <ListGroupItem>     <h3>E-mail</h3>
                             <p>{this.state.userdetails.email}</p></ListGroupItem>
-                            <ListGroupItem>     <h3>Gender</h3>
-                                        <p>{this.state.userdetails.gender}</p></ListGroupItem>
+                            <ListGroupItem>     <h3>Mobile Number</h3>
+                                        <p>{this.state.userdetails.mobile}</p></ListGroupItem>
                 </ListGroup>
-                </Card>
+
                 <Row >
 <div style={{padding:"10px"}}>
-                    <Button >Edit profile</Button>
+                    <Button href="/editprofile">Edit profile</Button>
                     </div>
 <div style={{padding:"10px"}}>
                         <Button onClick={this.deleteuser}>Delete account</Button>
 </div>
                     </Row>
-
+</Card>
                 </center>
 
 
@@ -75,4 +78,4 @@ class Login extends Component{
     }
 }
 
-export default  Login ;
+export default  profile ;
