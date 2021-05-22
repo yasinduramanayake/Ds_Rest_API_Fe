@@ -29,8 +29,8 @@ function App() {
           <Route exact path="/products/edit/:id" component={EditProducts}/>
           <Route exact path="/admin/home" component={AdminHome}/>
           <Route exact path="/products" component={Products} />
-          <Route exact path="/" component={Register} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/profile" component={Profile} />
         <Route exact path="/editprofile" component={EditProfile} />

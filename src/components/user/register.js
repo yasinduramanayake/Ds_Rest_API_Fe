@@ -100,8 +100,9 @@ class Register extends Component{
 
         return (
 
-
-            <Card>
+            <center>
+                <br></br>
+            <Card style={{width:'540px'}}>
 
                 <Card.Header as="h5">Register Here!</Card.Header>
                 <Card.Body>
@@ -150,12 +151,13 @@ class Register extends Component{
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button variant="primary" style={{height:'35px' , width:'400px'}}  type="submit">
+                            Register
                                 </Button>
                     </Form>
                 </Card.Body>
-            </Card>
+                </Card>
+                </center>
         );
     }
 }

@@ -2,9 +2,10 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom';
-import {  Form } from 'react-bootstrap';
+import {  Collapse, Form, Nav } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
+import { Col } from 'reactstrap';
 
 
 class Login extends Component{
@@ -104,11 +105,19 @@ class Login extends Component{
                              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 
               </Form.Group>
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" style={{height:'35px' , width:'400px'}} type="submit">
                                     Login
                                 </Button>
-                    </Form>
+                        </Form>
+
+
+ <Nav  className="mr-auto">
+                               <Col>
+                                    <Nav.Link href="/register">Don't you have an account? register here</Nav.Link>
+                              </Col>
+                        </Nav>
                     </Card.Body>
+
                 </Card>
                 </center>
             // <div className="container" style={{marginTop:'20px'}}>
