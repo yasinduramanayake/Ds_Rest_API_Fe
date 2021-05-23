@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
-import NevBar from './nevbar';
+import NevBar from './Navbar';
 
 class Update extends Component{
 

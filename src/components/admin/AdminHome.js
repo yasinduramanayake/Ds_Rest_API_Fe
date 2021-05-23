@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
 import { Button } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import AdminNav from './AdminNav';
 
 export default class AdminHome extends Component {
 
     render() {
         return (
-            <section className="card text-center" style={{marginTop:"50px"}}>
+            <div>
+                <AdminNav></AdminNav>
+            <section className="cards text-center" style={{marginTop:"50px"}}>
                 <div class="container card-body light-gray-bg ">
-                    <h4 className="card-title">Wellcome to Admin Home</h4>
+                    <h4 className="card-title">Wellcome to Seller Home</h4>
                    
                         <div class="row">
                             <div class="col-lg-3 col-md-3 admin-icon">
@@ -26,8 +29,8 @@ export default class AdminHome extends Component {
                              
                         </div>    
                     </div>
-            
             </section>
+        </div>
         );
     }
 }

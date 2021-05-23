@@ -1,0 +1,200 @@
+import React,{Component} from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2'
+import {Link} from 'react-router-dom';
+import NevBar from './Navbar';
+
+class OrderEdit extends Component{
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            visible: false,
+            pname:'',
+            price:'',
+            email:'',
+            qty:'',
+            rname:'',
+            address:''
+        };
+
+        this.onFormSubmit= this.onFormSubmit.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
+        this.onDismiss = this.onDismiss.bind(this);
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:8081/getOrder/'+this.props.match.params.id)
+            .then(
+                order =>{
+                    this.setState({
+                        pname:order.data.pname,
+                        price:order.data.price,
+                        email:order.data.email,
+                        qty:order.data.qty,
+                        rname:order.data.rname,
+                        address:order.data.address
+                    })
+                }
+            )
+    }
+
+    onDismiss() {
+        this.setState({ visible: false });
+    }
+
+    onValueChange(e){
+        this.setState({
+            [e.target.name]:e.target.value
+        })
+    }
+
+    onFormSubmit(e){
+        e.preventDefault();
+
+        const pname = this.state.pname;
+        const price = this.state.price; 
+        const email = this.state.email;
+        const qty = this.state.qty;
+        const rname =  this.state.rname;
+        const address = this.state.address;
+
+        const order={
+            pname,
+            price,
+            email,
+            qty,
+            rname,
+            address
+        }
+
+        axios.post('http://localhost:8081/updateOrder/'+this.props.match.params.id,order)
+            .then(
+                (res)=>{
+                    this.setState({
+                        visible:true,
+                        pname:'',
+                        price:'',
+                        email:'',
+                        qty:'',
+                        rname:'',
+                        address:''
+                    });
+
+                    Swal.fire(
+                        'Done',
+                        'Order Update Sucessfully!',
+                        'success'
+                        )
+
+                    this.props.history.push('/orders/view');
+
+                },
+                (err)=>{
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                      })
+                }
+
+            )
+
+    }
+    
+    render(){
+        return(
+            <div>
+            <NevBar/>
+            <div className="container" style={{marginTop:'20px'}}>
+                <main role="main">
+                    <section className="jumbotron text-center" >
+                        <div className="container">
+                                <div className="col-md-12 text-center">
+                                    <h4 className="pb-4">Update Order </h4>
+                                <form id='staffForm' onSubmit={this.onFormSubmit}>
+                                    <div className="row form-group">
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Product Name</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="pname"
+                                                onChange={this.onValueChange}
+                                                value={this.state.pname}
+                                                />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Price</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="price"
+                                                onChange={this.onValueChange}
+                                                value={this.state.price}
+                                                />
+                                        </div>
+                                    </div>
+
+                                    <div className="row form-group">
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Email</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="email"
+                                                value={localStorage.token}
+                                                />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Quantity</label>
+                                            <select id="qty" name="qty" onChange={this.onValueChange} class="form-control">
+                                                <option value={this.state.qty}selected>{this.state.qty}</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>  
+                                        </div>
+                                    </div>
+                                    <div className="row form-group">
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Recevier Name</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="rname"
+                                                onChange={this.onValueChange}
+                                                value={this.state.rname}
+                                                />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label >Delivery Address</label>
+                                            <textarea
+                                                    className="form-control"
+                                                    name="address"
+                                                    rows="1"
+                                                    placeholder="Delivery Address"
+                                                    onChange={this.onValueChange}
+                                                    value={this.state.address}
+                                                    />
+                                        </div>
+                                    </div>
+                                   
+                                    <div className="form-group text-center">
+                                        <button type="submit" className="admin-blue-button">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+         </div>
+        );
+    }
+}
+
+export default OrderEdit;

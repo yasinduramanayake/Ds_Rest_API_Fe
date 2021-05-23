@@ -1,3 +1,6 @@
+body{
+  background-color: #EEEEEE !important;
+}
 
 .single_b_title {
   text-align: center;
@@ -14,9 +17,25 @@
   margin-bottom: 0px;
 }
 
+.slide{
+  height:450px
+}
+
 img{
   width: 225px;
   height: 180px;
+}
+
+.card-icon{
+  width: 50%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product_img{
+  margin-top: 10px;
 }
 
 .single_b_title h2:before {

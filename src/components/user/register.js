@@ -81,7 +81,7 @@ class Register extends Component{
                         'success'
                         )
 
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
 
                 },
                 (err)=>{

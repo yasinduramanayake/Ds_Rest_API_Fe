@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import {Link} from 'react-router-dom';
+import AdminNav from '../AdminNav';
 
 class EditProducts extends Component{
 
@@ -70,7 +71,7 @@ class EditProducts extends Component{
             description
         }
 
-        axios.post('http://localhost:8080/updateProduct/'+this.props.match.params.id,product)
+        axios.post('http://localhost:8081/updateProduct/'+this.props.match.params.id,product)
             .then(
                 res=>{
                     this.setState({
@@ -94,11 +95,10 @@ class EditProducts extends Component{
 
     render(){
         return(
+            <div>
+                <AdminNav></AdminNav>
             <div className="container" style={{marginTop:'20px'}}>
-                    <div style={{display:'flex',justifyContent:'left'}}>
-                        <Link to='/products/view'><span><i className="fa fa-arrow-left"/></span></Link>
-                    </div>
-                <main role="main" style={{marginTop:'40px'}}>
+                <main role="main">
                     <section className="jumbotron text-center" >
                         <div className="container">
                                 <div className="col-md-12 text-center">
@@ -168,6 +168,7 @@ class EditProducts extends Component{
                     </section>
                 </main>
             </div>
+         </div>
         );
     }
 }

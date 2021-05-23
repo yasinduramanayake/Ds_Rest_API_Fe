@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import {Link} from 'react-router-dom';
 import { CardHeader, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Button, Card, CardTitle, Col, ListGroup, ListGroupItem, Row } from 'reactstrap';
-import NevBar from './nevbar';
+import NevBar from './Navbar';
 
 
 class profile extends Component{
@@ -59,14 +59,15 @@ class profile extends Component{
                                         <p>{this.state.userdetails.mobile}</p></ListGroupItem>
                 </ListGroup>
 
-                <Row >
-<div style={{padding:"10px"}}>
-                    <Button href="/editprofile">Edit profile</Button>
+                <div className='row mx-auto'>
+                 
+                    <div style={{padding:"10px"}}>
+                        <Button href="/editprofile">Edit profile</Button>
                     </div>
-<div style={{padding:"10px"}}>
+                    <div style={{padding:"10px"}}>
                         <Button onClick={this.deleteuser}>Delete account</Button>
-</div>
-                    </Row>
+                    </div>
+                </div>                 
 </Card>
                 </center>
 

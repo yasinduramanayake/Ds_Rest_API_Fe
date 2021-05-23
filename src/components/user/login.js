@@ -55,13 +55,16 @@ class Login extends Component{
                         loggedUser: res.data.email
                     }, () => localStorage.setItem('token', this.state.loggedUser))
                     this.props.history.push('/home');
+                    if(this.state.loggedUser==='seller@gmail.com'){
+                        this.props.history.push('/admin/home');
+                    }
                     },
 
 
 
                 (err) => {
                     alert('invalid creditionals')
-                    this.props.history.push('/login');
+                    this.props.history.push('/');
 
                 }
 

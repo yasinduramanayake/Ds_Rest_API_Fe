@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import {UncontrolledAlert,Button } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import AdminNav from '../AdminNav';
 
 import ProductsRow from './ProductsRow';
 
@@ -51,10 +52,9 @@ class ViewProducts extends Component{
         if(this.state.products.length>0){
 
             return(
+                <div>
+                    <AdminNav></AdminNav>
                 <div className='container' style={{marginTop:'20px'}}>
-                    <div style={{display:'flex',justifyContent:'left'}}>
-                        <Link to='/admin/home'><span><i className="fa fa-arrow-left"/></span></Link>
-                    </div>
                     <h2 className="margin-bottom-10 text-center">View Products</h2>
                     <br/>
                     <div className="admin-content-widget no-padding">
@@ -77,6 +77,7 @@ class ViewProducts extends Component{
                     </table>
                     </div>
                 </div>
+              </div>
               </div>
             )
 

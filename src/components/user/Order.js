@@ -2,25 +2,37 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import {Link} from 'react-router-dom';
-import AdminNav from '../AdminNav';
-
-class AddProducts extends Component{
+import NevBar from './Navbar';
+class Order extends Component{
 
     constructor(props) {
         super(props);
 
         this.state = {
             visible: false,
-            name:'',
+            pname:'',
             price:'',
-            ventor:'',
-            img:'',
-            description:''
+            email:'',
+            qty:'',
+            rname:'',
+            address:''
         };
 
         this.onFormSubmit= this.onFormSubmit.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.onDismiss = this.onDismiss.bind(this);
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:8081/getProduct/'+this.props.match.params.id)
+            .then(
+                product =>{
+                    this.setState({
+                        pname:product.data.name,
+                        price:product.data.price
+                    })
+                }
+            )
     }
 
     onDismiss() {
@@ -35,41 +47,43 @@ class AddProducts extends Component{
 
     onFormSubmit(e){
         e.preventDefault();
-        var path = this.state.img;
-        var filename = path.replace(/^.*\\/, "");
 
-        const name = this.state.name;
-        const price = this.state.price;
-        const ventor = this.state.ventor;
-        const img = filename;
-        const description = this.state.description;
+        const pname = this.state.pname;
+        const price = this.state.price; 
+        const email = this.state.email;
+        const qty = this.state.qty;
+        const rname =  this.state.rname;
+        const address = this.state.address;
 
-        const product={
-            name,
+        const order={
+            pname,
             price,
-            ventor,
-            img,
-            description
+            email,
+            qty,
+            rname,
+            address
         }
 
-        axios.post('http://localhost:8081/addproducts',product)
+        axios.post('http://localhost:8081/addOrders',order)
             .then(
                 (res)=>{
                     this.setState({
                         visible:true,
-                        name:'',
+                        pname:'',
                         price:'',
-                        description:'',
-                        ventor:'',
-                        img:''});
+                        email:'',
+                        qty:'',
+                        rname:'',
+                        address:''
+                    });
 
                     Swal.fire(
                         'Done',
-                        'New Product Added!',
+                        'Product Ordered Sucessfully!',
                         'success'
                         )
 
-                    this.props.history.push('/products/view');
+                    this.props.history.push('/orders/view');
 
                 },
                 (err)=>{
@@ -84,28 +98,28 @@ class AddProducts extends Component{
             )
 
     }
-
+    
     render(){
         return(
             <div>
-                <AdminNav></AdminNav>
-            <div className="container" style={{marginTop:'10px'}}>
+            <NevBar/>
+            <div className="container" style={{marginTop:'20px'}}>
                 <main role="main">
                     <section className="jumbotron text-center" >
                         <div className="container">
                                 <div className="col-md-12 text-center">
-                                    <h4 className="pb-4">Add New Products</h4>
-                                <form id='productForm' onSubmit={this.onFormSubmit}>
+                                    <h4 className="pb-4">Order Product</h4>
+                                <form id='staffForm' onSubmit={this.onFormSubmit}>
                                     <div className="row form-group">
                                         <div className="col-lg-6 col-md-6 form-group">
                                             <label>Product Name</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                name="name"
-                                                placeholder="Product Name"
+                                                name="pname"
                                                 onChange={this.onValueChange}
-                                                value={this.state.name}/>
+                                                value={this.state.pname}
+                                                />
                                         </div>
                                         <div className="col-lg-6 col-md-6 form-group">
                                             <label>Price</label>
@@ -113,47 +127,60 @@ class AddProducts extends Component{
                                                 type="text"
                                                 className="form-control"
                                                 name="price"
-                                                placeholder="Price"
                                                 onChange={this.onValueChange}
-                                                value={this.state.price}/>
+                                                value={this.state.price}
+                                                />
                                         </div>
                                     </div>
+
                                     <div className="row form-group">
                                         <div className="col-lg-6 col-md-6 form-group">
-                                            <label>Ventor</label>
+                                            <label>Email</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                name="ventor"
-                                                placeholder="Ventor"
-                                                onChange={this.onValueChange}
-                                                value={this.state.ventor}/>
+                                                name="email"
+                                              
+                                                value={localStorage.token}
+                                                />
                                         </div>
                                         <div className="col-lg-6 col-md-6 form-group">
-                                            <label>Product Image</label>
-                                            <input
-                                                type="file"
-                                                className="form-control"
-                                                name="img"
-                                                placeholder="Image"
-                                                onChange={this.onValueChange}
-                                                value={this.state.img}/>
+                                            <label>Quantity</label>
+                                            <select id="qty" name="qty" onChange={this.onValueChange} class="form-control">
+                                                <option value="qty" selected>Select Quantity</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>  
                                         </div>
                                     </div>
                                     <div className="row form-group">
-                                        <div className="col-lg-12 col-md-12 form-group">
-                                            <label >Description</label>
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label>Recevier Name</label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="rname"
+                                                onChange={this.onValueChange}
+                                                value={this.state.rname}
+                                                />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 form-group">
+                                            <label >Delivery Address</label>
                                             <textarea
                                                     className="form-control"
-                                                    name="description"
-                                                    rows="2"
-                                                    placeholder="Description"
+                                                    name="address"
+                                                    rows="1"
+                                                    placeholder="Delivery Address"
                                                     onChange={this.onValueChange}
-                                                    value={this.state.description}/>
+                                                    value={this.state.description}
+                                                    />
                                         </div>
                                     </div>
+                                   
                                     <div className="form-group text-center">
-                                        <button type="submit"className="admin-blue-button">Add</button>
+                                        <button type="submit" className="admin-blue-button">Confirm</button>
                                     </div>
                                 </form>
                             </div>
@@ -161,9 +188,9 @@ class AddProducts extends Component{
                     </section>
                 </main>
             </div>
-        </div>
+         </div>
         );
     }
 }
 
-export default AddProducts;
+export default Order;
